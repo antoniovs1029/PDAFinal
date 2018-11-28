@@ -1,3 +1,7 @@
+"""
+Implementación del Beamformer GSC.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
@@ -8,8 +12,8 @@ from scipy.io import wavfile
 
 WINDOW_SIZE = 1024
 N_MICS = 3 # Si se cambia, se debera cambiar el resto del código
-mu = .03
-Nw = 100 # Tamaño del filtro
+mu = .1
+Nw = 16 # Tamaño del filtro
 directory = "../in/clean-2-source/"
 outputfile = "out_hanneado-noisy2.wav"
 mics = []
@@ -39,7 +43,7 @@ def make_W(n_mics, frecs, T):
 
     return np.vstack(rows)
 
-DOA = 0 # grados
+DOA = -30 # grados
 DIST = 0.18 # metros
 VSOUND = 343 # metros / s
 BUFFER_SIZE = WINDOW_SIZE*4 # Para hacer hanneado y overlap and sum es necesario procesar un buffer de 4 ventanas
@@ -70,6 +74,7 @@ for _ in range(N_MICS):
     buffers.append(np.zeros((WINDOW_SIZE*6), dtype=np.int16))
 
 o_buffer = np.zeros(Nw)
+g = np.zeros((N_MICS - 1, Nw))
 #for window_index in range(251):
 for window_index in range(len(mic_windows[0])):
     if window_index % 250 == 0:
@@ -122,7 +127,6 @@ for window_index in range(len(mic_windows[0])):
     # Aplicando beamformer
     o = np.zeros(WINDOW_SIZE)
     o[0:Nw] = o_buffer
-    g = np.zeros((N_MICS - 1, Nw))
 
     for k in range(Nw, WINDOW_SIZE):
         this_y_u = y_u[k]/(2**15)
