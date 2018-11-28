@@ -185,7 +185,7 @@ for window_index in range(len(mic_windows[0])): # se procesa una ventana a la ve
         p_x_n = np.sum(this_x_n**2, 1) # potencia del ruido; vector del tamaño del filtro
         p_o = np.sum(this_o**2) # potencia de la salida; escalar
 
-        this_mu = mu0*p_x_n/p_o # vector del tamaño del filtro
+        this_mu = mu0*p_x_n/p_o # vector del tamaño del filtro. En la primera iteración p_o = 0, por lo que esto es una división entre 0; python lo ignora pero no sé si C también.
 
         indices_positivos = this_mu < mu_max # vector booleano de tamaño N_MICS - 1
         indices_negativos = this_mu >= mu_max # vector booleano de tamaño N_MICS - 1
