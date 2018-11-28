@@ -69,7 +69,7 @@ def calcular_desfases(dist_micros, angulo, tipo, vsound = 343, rad_fuente = 1):
     else:
         return calcular_exactas(dist_micros, angulo, vsound, rad_fuente)
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     for angulo in [0, 90, 180, -90]:
         print("{0}°".format(angulo))
         print("\tSeno:", calcular_seno(.18, angulo))

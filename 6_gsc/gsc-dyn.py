@@ -4,7 +4,6 @@ tiempo.
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 from scipy.io import wavfile
 from calcular_distancias import calcular_desfases
 
