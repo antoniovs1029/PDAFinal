@@ -1,3 +1,12 @@
+"""
+Diferentes formas de calcular el desfase en tiempo entre los micrófonos,
+según fueron comentadas por el profesor en asesoríasself.
+
+En clase solo vimos la fórmula de "calcular_seno". Sin embargo, para el proyecto
+preferiremos usar "calcular_exactas"; así que solo ésta última se tendría que
+escribir en C.
+"""
+
 import numpy as np
 
 def calcular_seno(distancia, angulo, vsound = 343):
